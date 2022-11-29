@@ -1,0 +1,26 @@
+apiVersion: training.educates.dev/v1beta1
+kind: Workshop
+metadata:
+  name: asa-e-getting-started
+spec:
+  title: Starter Workshop
+  description: Starter workshop for Educates
+  workshop:
+    files:
+    - image:
+        url: $(image_repository)/asa-e-getting-started-files:latest
+      includePaths:
+      - /workshop/**
+      - /exercises/**
+      - /README.md
+  session:
+    namespaces:
+      budget: medium
+    applications:
+      terminal:
+        enabled: true
+        layout: split
+      console:
+        enabled: true
+      editor:
+        enabled: true

@@ -1,0 +1,15 @@
+apiVersion: training.educates.dev/v1beta1
+kind: TrainingPortal
+metadata:
+  name: asa-e-getting-started
+spec:
+  portal:
+    registration:
+      type: anonymous
+    updates:
+      workshop: true
+  workshops:
+  - name: asa-e-getting-started
+    capacity: 1
+    expires: 60m
+    orphaned: 5m
