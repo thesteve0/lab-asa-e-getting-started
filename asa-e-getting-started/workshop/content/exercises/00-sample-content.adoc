@@ -4,55 +4,66 @@ In this example the pages which make up the core of the workshop content are pla
 
 Included below are some tests and examples of page formatting using Markdown.
 
-#### Standard code block
+==== Standard code block
 
-```
+----
 echo "standard code block"
-```
 
-#### Click text to execute
+----
 
-```execute
+==== Click text to execute
+
+[source,execute]
+----
 echo "execute in terminal 1"
-```
 
-#### Click text to execute (with target)
+----
 
-```execute-1
+==== Click text to execute (with target)
+
+[source,execute-1]
+----
 echo "execute in terminal 1"
-```
 
-```execute-2
+----
+
+[source,execute-2]
+----
 echo "execute in terminal 2"
-```
+----
 
-```execute-all
+[source,execute-all]
+----
 echo "execute in all terminals"
-```
+----
 
-#### Click text to copy
+==== Click text to copy
 
-```copy
+[source,copy]
+----
 echo "copy text to buffer"
-```
+----
 
-#### Click text to copy (and edit)
+==== Click text to copy (and edit)
 
-```copy-and-edit
+[source,copy-and-edit]
+----
 echo "copy text to buffer"
-```
+----
 
-#### Interrupt command
+==== Interrupt command
 
-```execute
+[source,execute]
+----
 sleep 3600
-```
+----
 
-```execute
+[source,execute]
+----
 <ctrl-c>
-```
+----
 
-#### Variable interpolation
+==== Variable interpolation
 
 workshop_name: {{ workshop_name }}
 
@@ -66,6 +77,6 @@ ingress_domain: {{ ingress_domain }}
 
 ingress_protocol: {{ ingress_protocol }}
 
-#### Web site links
+==== Web site links
 
-[External](https://github.com/eduk8s)
+https://github.com/eduk8s[External]
