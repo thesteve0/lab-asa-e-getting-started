@@ -11,7 +11,7 @@ It is also important to understand that, for Azure Spring Apps, the web interfac
 
 If you comfortable doing all your work, except entering your password, in this lab environment then you are finished with the prequisistes. The next section covers what is required to do this lab outside the browser and on your own personal machine.
 
-== Working own machine rather than this environment
+== Working own your own machine rather than this environment
 
 It is possible to do all the exercises in this lab on your own machine.
 
