@@ -1,25 +1,19 @@
-—
-date: '2022-10-06'
-lastmod: '2022-10-06'
-layout: single
-team:
-- Steven Pousty
-- Jorge Morales Pou
-title: Setup yourself to work with Azure Spring Apps
-weight: 18
-tags:
-- Azure
-- Spring
-- Cloud Development
-oldPath: &quot;&quot;
-
-== aliases: []
 
 == Prerequisites
 
-This guide assumes you know Spring, but you are not that familiar with Azure or Azure Spring Apps Enterprise (ASA-E). If you have limited experience with ASA-E we recommend you read a https://onevmw-my.sharepoint.com/:w:/g/personal/spousty_vmware_com/EZq6t15kvZJEmM11jSrGYI0BNVg2ejUT-x9DRTHAZUOV9w?e=WQkBsF[basic document] basic Azure terminology. If you want to go deeper you can do the https://docs.microsoft.com/en-us/training/courses/az-900t00[course AZ-900T00], especially the last 2 modules.
+This lab *requires* that you have an Azure account which has access to Azure Spring Apps Enterprise.
+
+!!!!!!!!!TODO instructions here on how to see if you have access in the web console.
+
+This lab assumes you know Spring, but you are not that familiar with Azure or Azure Spring Apps Enterprise (ASA-E). If you have limited experience with ASA-E we recommend you read a https://onevmw-my.sharepoint.com/:w:/g/personal/spousty_vmware_com/EZq6t15kvZJEmM11jSrGYI0BNVg2ejUT-x9DRTHAZUOV9w?e=WQkBsF[basic document] basic Azure terminology. If you want to go deeper you can do the https://docs.microsoft.com/en-us/training/courses/az-900t00[course AZ-900T00], especially the last 2 modules.
 
 It is also important to understand that, for Azure Spring Apps, the web interface is primarily read-only. You can do some very basic high-level resource creation but the majority of your work has to happen through either the command line or IDE plugin (https://code.visualstudio.com/docs/azure/extensions[VSCode] and https://plugins.jetbrains.com/plugin/8053-azure-toolkit-for-intellij[Intellij]). Due to this architecture, there will not be many web screenshots until we get to features such as monitoring or logging.
+
+If you comfortable doing all your work, except entering your password, in this lab environment then you are finished with the prequisistes. The next section covers what is required to do this lab outside the browser and on your own personal machine.
+
+== Working own machine rather than this environment
+
+It is possible to do all the exercises in this lab on your own machine.
 
 There are separate how-to guides for Intellij and VScode that cover how to use the IDE plugins with Azure.
 
@@ -30,7 +24,7 @@ There are separate how-to guides for Intellij and VScode that cover how to use t
 
 We also assume you have a JVM &gt; version 8 and Maven already installed on your machine. They should already be set up and working in any terminal where you plan to use the Azure CLI.
 
-Finally, we also assume you have logged in Azure from the CLI or IDE. For the CLI, if you top
+Finally, we also assume you have logged in Azure from the CLI or IDE. To check with the CLI type in:
 
 [source,shell]
 ----

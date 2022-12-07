@@ -1,6 +1,4 @@
-
-== aliases: []
-
+We have already added the application code to this coding environment. The next section's instruction are optional and only if you want to edit the code on your local machine.
 You might have already an application to work with, but in this guide we're going to use a simple
 application and we're going to guide you through the process to create a Spring Boot application ready to
 be used in Azure Spring Apps. You can learn more of the process in link:spring.io[spring.io]
