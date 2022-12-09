@@ -5,11 +5,11 @@ This lab *requires* that you have an Azure account which has access to Azure Spr
 
 !!!!!!!!!TODO instructions here on how to see if you have access in the web console.
 
-This lab assumes you know Spring, but you are not that familiar with Azure or Azure Spring Apps Enterprise (ASA-E). If you have limited experience with ASA-E we recommend you read a https://onevmw-my.sharepoint.com/:w:/g/personal/spousty_vmware_com/EZq6t15kvZJEmM11jSrGYI0BNVg2ejUT-x9DRTHAZUOV9w?e=WQkBsF[basic document] basic Azure terminology. If you want to go deeper you can do the https://docs.microsoft.com/en-us/training/courses/az-900t00[course AZ-900T00], especially the last 2 modules.
+This lab assumes you know Spring, but you are not that familiar with Azure or Azure Spring Apps Enterprise (ASA-E). Most of the important concepts used in this lab were covered in the previous exercise. If you want to go deeper you can do the https://docs.microsoft.com/en-us/training/courses/az-900t00[course AZ-900T00], especially the last 2 modules.
 
 It is also important to understand that, for Azure Spring Apps, the web interface is primarily read-only. You can do some very basic high-level resource creation but the majority of your work has to happen through either the command line or IDE plugin (https://code.visualstudio.com/docs/azure/extensions[VSCode] and https://plugins.jetbrains.com/plugin/8053-azure-toolkit-for-intellij[Intellij]). Due to this architecture, there will not be many web screenshots until we get to features such as monitoring or logging.
 
-If you comfortable doing all your work, except entering your password, in this lab environment then you are finished with the prequisistes. The next section covers what is required to do this lab outside the browser and on your own personal machine.
+If you are comfortable doing all your work, in this lab environment then you are finished with the prerequisites. The next section covers what is required to do this lab outside the browser and on your own personal machine.
 
 == Working own your own machine rather than this environment
 
@@ -26,13 +26,13 @@ We also assume you have a JVM &gt; version 8 and Maven already installed on your
 
 Finally, we also assume you have logged in Azure from the CLI or IDE. To check with the CLI type in:
 
-[source,shell]
+[source,console,role=execute,copy]
 ----
 $ az account show
 
 ----
 
-If you have not logged in you should be prompted to login. If you are logged in, the response should be some JSON that contains your Subscription ID, Name, and other fields.
+If you have not logged in you should be prompted to login. If you are logged in, the response should be some JSON that contains your Subscription ID, Name, and other fields. The next section gives more detailed instructions on how to login.
 
 With those preliminaries out of the way, let's deploy your Spring Application on ASA-E.
 
@@ -40,24 +40,40 @@ With those preliminaries out of the way, let's deploy your Spring Application on
 
 In this module you are only going to create just enough application that you can learn the terminology and basic mechanics of using ASA-E for your applications. In later modules we will go into more depth.
 
-The first step will be to use the CLI to login to Azure. Because Azure web console and auth follow good security practices, you have to use a device code to login.
+. The first step will be to use the CLI to login to Azure. Since Azure web console and auth follow good security practices, you have to use a device code to login.
++
 Use this command:
- `az login --use-device-code`
- https://learn.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest#az-login
++
+[source,console,role=execute,copy]
+----
+ az login --use-device-code
+----
+. Once you have logged in, we are going to make a Resource Group to hold all our other created resources. The Resource Group will serve two purposes. First, since Azure objects need unique names, it will put all of our resources into a namespace. Second, when we are done with this module, we can delete the resource group and everything we created will be deleted.
++
+Use this command:
++
+[source,console,role=execute,copy]
+----
+az group create -l westus -n learning
+----
++
+The `+-l+` is specifies a geographic location for the resource group. Azure has (https://azure.microsoft.com/en-us/explore/global-infrastructure/geographies/#geographies)[a page where] you can find the right region based on geography.
++
+The `+-n+` is the name you want to give to your resource group. Here we chose "learning", but you can chose a different name if you prefer. If you do pick a different name you are going to need to change all the commands to match the name you gave your resource group.
 
-. ResourceGroup
- `az group create -l westus -n playing1`
- https://learn.microsoft.com/en-us/cli/azure/group?view=azure-cli-latest#az-group-create
-
-. Spring App Service
- `az spring create -n the-asa-service -g playing1 --sku Enterprise  --enable-gateway --enable-api-portal`
- https://learn.microsoft.com/en-us/cli/azure/spring?view=azure-cli-latest#az-spring-create
+. With that complete we are ready to make our Spring App Enterprise Service.
++
+[source,console,role=execute,copy]
+----
+az spring create -n the-asa-service -g playing1 --sku Enterprise  --enable-gateway --enable-api-portal
+----
+ STOPPED HERE
  Same as spinning up any service in Azure - in this case we are spinning up resources that know how to host Spring, and other language runtimes.
  Enterprise also makes it possible to add frequently used technology, such as an API portal, to the resources spun up.
 
 This is kinda cool to set the defaults so you don't have to keep entereing it.
 
-[source,shell]
+[source,console]
 ----
 az configure --defaults \
     group=${RESOURCE_GROUP} \
