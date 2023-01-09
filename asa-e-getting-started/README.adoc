@@ -1,0 +1,32 @@
+= Getting Started with Azure Spring Apps - Enterprise
+
+Here are the steps to get it working with docker.
+
+if you are using these instructions to help deploy a different workshop, replace all instances of `lab-asa-e-getting-started`
+with the directory name of your workshop
+
+All the cli commands are run in the directory containing `.git`
+
+1. Make sure you have Carvel ImgPkg https://carvel.dev/imgpkg/docs/v0.34.0/install/[installed] on your machine.
+2. Run this command to dowload the latest client
+
+        imgpkg pull -i ghcr.io/vmware-tanzu-labs/educates-client-programs:latest -o educates-client-programs
+
+3. This puts the binary in the following directory `~/educates-client-programs/bin`, put the appropriate binary either in a directory
+in your path or add that directory to your path.
+4. Now you publish your workshop
+
+    educates publish-workshop asa-e-getting-started
+
+5. And then you deploy your workshop
+
+    educates docker workshop deploy -f asa-e-getting-started
++
+And this should pop-up the browser and you should be good to go
++
+6. Sometimes the changes don't get picked up. Just delete the workshop and go through the steps again
+
+    educates docker workshop delete -f asa-e-getting-started
+
+
+

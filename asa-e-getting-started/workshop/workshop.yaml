@@ -2,6 +2,10 @@ name: Starter Workshop
 modules:
   activate:
   - workshop-overview
-  - setup-environment
-  - exercises/01-sample-content
+  - exercises/01-asa-e-concepts
+  - exercises/03-setup-asa-e
+  - exercises/04-create-a-local-springapp
+  - exercises/06-create-and-deploy-an-app
+  - exercises/07-observability
   - workshop-summary
+  -
