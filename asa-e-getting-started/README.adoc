@@ -29,4 +29,12 @@ And this should pop-up the browser and you should be good to go
     educates docker workshop delete -f asa-e-getting-started
 
 
+TO ADD TO THE BASE IMAGE
+Maven
+azure cli
+
+doc is here for the CLI version of educates
+https://docs.educates.dev/workshop-content/building-an-image.html
+
+
 
