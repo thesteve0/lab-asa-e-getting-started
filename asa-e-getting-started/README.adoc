@@ -16,7 +16,7 @@ All the cli commands are run in the directory containing `.git`
 in your path or add that directory to your path.
 4. Now you publish your workshop
 
-    educates publish-workshop asa-e-getting-started
+    educates docker publish-workshop asa-e-getting-started
 
 5. And then you deploy your workshop
 
@@ -29,12 +29,51 @@ And this should pop-up the browser and you should be good to go
     educates docker workshop delete -f asa-e-getting-started
 
 
-TO ADD TO THE BASE IMAGE
-Maven
-azure cli
 
 doc is here for the CLI version of educates
 https://docs.educates.dev/workshop-content/building-an-image.html
 
 
 
+As a result, do the following:
+
+    educates delete-cluster --all
+
+That will delete cluster created with CLI as well as the image registry.
+Ensure not running any workshop in docker itself.
+
+    educates docker workshop list
+
+For each work listed, run:
+
+    educates docker workshop delete -n xxx
+
+where xxx is the name of each successive workshop.
+Now for the important step, run:
+
+    docker system prune
+
+or at least:
+    docker network prune
+
+as we want to get rid of any old docker networks for the Kubernetes kind cluster or educates.
+This time skip deploying Kubernetes, instead try just the following:
+
+    educates admin registry deploy
+
+This will deploy the registry. This will happen as side effect of trying to publish a workshop first time, but lets do it separately.
+Now create a new workshop (OPTIONAL  if I have already written the content.
+
+    educates new-workshop sample-workshop
+
+Publish this workshop.
+
+    educates publish-workshop sample-workshop
+
+Now deploy the workshop to docker.
+
+    educates docker workshop deploy -f sample-workshop
+
+If you are running desktop on the same host, this should have side effect of opening browser on the workshop. If for some reason it doesn't, can open the working using:
+
+    educates docker workshop open -f sample-workshop
