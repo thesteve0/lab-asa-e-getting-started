@@ -71,11 +71,7 @@ az spring create -n the-asa-service -g learning --sku Enterprise  --enable-gatew
 This command will take a while to complete as Azure is spinning up a cluster for your applications.
 
 When this is finished provision you now have your Azure Spring App Enterprise service up and running. We have also enabled the Spring Gateway and Spring API Portal features.
-You are all set to deploy your Spring (or various https://learn.microsoft.com/en-us/azure/spring-apps/overview#deploy-and-manage-spring-and-polyglot-applications[other languages]). We are ready to deploy some code to our new shiny service:
-
- STOPPED HERE
- Same as spinning up any service in Azure - in this case we are spinning up resources that know how to host Spring, and other language runtimes.
- Enterprise also makes it possible to add frequently used technology, such as an API portal, to the resources spun up.
+You are all set to deploy your Spring (or various https://learn.microsoft.com/en-us/azure/spring-apps/overview#deploy-and-manage-spring-and-polyglot-applications[other languages]). We are ready to create an application and deploy some code on our new shiny service:
 
 This is kinda cool to set the defaults so you don't have to keep entereing it.
 
