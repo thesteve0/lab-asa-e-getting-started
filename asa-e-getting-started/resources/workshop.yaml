@@ -17,7 +17,6 @@ spec:
   session:
     ingresses:
       - name: application
-        protocol: http
         port: 8080
     namespaces:
       budget: medium

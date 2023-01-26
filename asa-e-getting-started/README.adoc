@@ -77,3 +77,10 @@ Now deploy the workshop to docker.
 If you are running desktop on the same host, this should have side effect of opening browser on the workshop. If for some reason it doesn't, can open the working using:
 
     educates docker workshop open -f sample-workshop
+
+
+https://docs.educates.dev/custom-resources/workshop-definition.html#defining-additional-ingress-points
+
+https://docs.educates.dev/workshop-content/workshop-instructions.html#passing-of-environment-variables
+
+https://docs.educates.dev/workshop-content/workshop-instructions.html#clickable-actions-for-the-dashboard
