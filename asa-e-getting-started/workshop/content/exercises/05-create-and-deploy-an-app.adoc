@@ -1,46 +1,63 @@
 
-== aliases: []
+= Deploying to Azure Spring Apps Enterprise (ASA-E)
 
-Since we now want to run this application in the cloud, we need to show how to create the Azure Spring Apps and then deploy the app we created before. 
+Up until this point in the tutorial we haven't done anything really worth mentioning (unless you never ran a Spring Boot app before). But with all those
+preliminaries complete we can demonstrate the benefits of moving your applications to ASA-E. Let's jump right in with the CLI.
 
-Then, we can mention other ways to deploy the app without using the Build Service, e.g. Building the container locally
+== Logging in and creating our Resource Group
 
-== OLD CONTENT BELOW
+If you forgot the check if you were https://learn.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest#az-login[logged in] or not in an earlier step doing the rest of the workshop requires an authenticaded CLI. Remember we are using "--use-device-code" because, following good security practices, we can not wrap the login page in the Iframe we have here.
 
-== Prerequisites
-
-This guide assumes you know Spring, but you are not that familiar with Azure or Azure Spring Apps Enterprise (ASA-E). If you have limited experience with ASA-E we recommend you read a https://onevmw-my.sharepoint.com/:w:/g/personal/spousty_vmware_com/EZq6t15kvZJEmM11jSrGYI0BNVg2ejUT-x9DRTHAZUOV9w?e=WQkBsF[basic document] basic Azure terminology. If you want to go deeper you can do the https://docs.microsoft.com/en-us/training/courses/az-900t00[course AZ-900T00], especially the last 2 modules.
-
-It is also important to understand that, for Azure Spring Apps, the web interface is primarily read-only. You can do some very basic high-level resource creation but the majority of your work has to happen through either the command line or IDE plugin (https://code.visualstudio.com/docs/azure/extensions[VSCode] and https://plugins.jetbrains.com/plugin/8053-azure-toolkit-for-intellij[Intellij]). Due to this architecture, there will not be many web screenshots until we get to features such as monitoring or logging.
-
-There are separate how-to guides for Intellij and VScode that cover how to use the IDE plugins with Azure.
-
-* https://docs.microsoft.com/en-us/azure/spring-apps/how-to-intellij-deploy-apps[Intellij Azure Spring Apps] specific
-* https://docs.microsoft.com/en-us/azure/developer/java/toolkit-for-intellij/[Intellij general Azure usages]
-* https://code.visualstudio.com/docs/java/java-spring-apps[VS Code Azure Spring Apps] specific
-* https://code.visualstudio.com/docs/azure/extensions[VS Code general Azure usages]
-
-We also assume you have a JVM &gt; version 8 and Maven already installed on your machine. They should already be set up and working in any terminal where you plan to use the Azure CLI.
-
-Finally, we also assume you have logged in Azure from the CLI or IDE. For the CLI, if you top
-
-[source,shell]
+[source, bash, role=execute]
 ----
-$ az account show
-
+ az login --use-device-code
 ----
 
-If you have not logged in you should be prompted to login. If you are logged in, the response should be some JSON that contains your Subscription ID, Name, and other fields.
+After executing this command, you should receive a prompt to go to a Microsoft website and enter a code. Clicking the link will open a new browser tab for the URL. You can also just copy the URL and open it in a completely different browser. Once you loging to Azure and enter the code your CLI will be authenticated for the rest of this class. When you finish with this workshop we destroy the machine hosting your workshop and delete any session information. Your password is never shared with us.
 
-TODOlink:./%5BPut-in-a-screenshot-and-text-for-intellij-login.html[[Put in a screenshot and text for intellij login]]
+Now that you are logged in, the next step is to create a resource group to hold all the work we create today. Remember, resource group is similar to a namespace within your account. Having this created will make it exteremely easy for you to clean up all the Azure resources when we finish. Delete the resource group and everything inside it is deleted. No hunting around for random service or virtual IP floating around still costing you money.
 
-With those preliminaries out of the way, let's deploy your Spring Application on ASA-E.
+This command will require you to pick a region where your services will be created. We suggest you pick one that is physically closest to you.  The https://stackoverflow.com/questions/44143981/is-there-an-api-to-list-all-azure-regions[following command] lists all the current availability zones:
 
-== Creating the Application
+[source, bash, role=execute]
+----
+az account list-locations -o table
+----
 
-We are going to create just enough application that you can learn the terminology and basic mechanics of using ASA-E for your applications. In later modules we will go into more depth.
+The second column, Name, is the code you want to use in the create region command. Since the author is in California, the example will show West US 2.
 
-TODOlink:./%5BPet-clinic-is-no-good---this-app-will-be-super-simple-the-whole-way-and-not-do-anything-real.html[[Pet clinic is no good - this app will be super simple the whole way and not do anything real]]
+[source, bash, role=copy]
+----
+az group create -l westus2 -n playing1
+----
+
+This creates a Resource Group in westus2 with a name of playing1. You can use whatever name would you like for your resource group, just make sure to alter the rest of the commands to match your name.
+
+
+== Creating our ASA-E Service
+
+If you have never created an ASA-E service before, you need to accept the terms of service before continuing:
+
+[source, bash, role=execute]
+----
+az provider register --namespace Microsoft.SaaS
+az term accept --publisher vmware-inc --product azure-spring-cloud-vmware-tanzu-2 --plan asa-ent-hr-mtr
+----
+
+With that out of the way we can now create our Azure Spring Apps Enterprise service.
+
+[source, bash, role=copy]
+----
+az spring create -n my-asa-service -g playing1 --sku Enterprise
+----
+
+Our ASA-E service will be named 'my-asa-service', we wanted create in the resource group we just made, and we want to enable the enterprise tier.
+
+
+== Creating and deploying our simple app
+
+
+
 1. Login - because we can't open an iframe for the portal
  `az login --use-device-code`
  https://learn.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest#az-login
