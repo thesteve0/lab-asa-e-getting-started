@@ -28,7 +28,7 @@ The second column, Name, is the code you want to use in the create region comman
 
 [source, bash, role=copy]
 ----
-az group create -l westus2 -n playing1
+az group create -l westus2 -n learning
 ----
 
 This creates a Resource Group in westus2 with a name of playing1. You can use whatever name would you like for your resource group, just make sure to alter the rest of the commands to match your name.
@@ -48,14 +48,38 @@ With that out of the way we can now create our Azure Spring Apps Enterprise serv
 
 [source, bash, role=copy]
 ----
-az spring create -n my-asa-service -g playing1 --sku Enterprise
+az spring create -n first-asa-service -g learning --sku Enterprise
 ----
 
-Our ASA-E service will be named 'my-asa-service', we wanted create in the resource group we just made, and we want to enable the enterprise tier.
+Our ASA-E service will be named 'first-asa-service', we want to create in the resource group we just made, and we want to enable the enterprise tier.
 
+NOTE: It can take 15 to 30 minutes to create this service. This command triggers the creation of a cluster of machines. Even if the animated icon stops spinning it is still working on creating the service. You will only need to run this command once and then you can add as many applications as you want to this service (within resource limits)
 
 == Creating and deploying our simple app
 
+=== Creating the application
+Now that we have our own ASA-E service spun up we can move our simple app into the service. There are two stages to getting an app into the service
+
+1. First we create the application inside the service. An app is its own resource and can have 1 or more deployments.
++
+[source, bash, role=execute]
+----
+az spring app create -n simpleapp -s first-asa-service -g learning  --assign-endpoint true
+----
++
+This command creates an app named "simpleapp", in our service, in the learning resource group, and we want the system to give us a public endpoint
+
+=== Deploying the application
+
+Now we package it up on our end and deploy it to the app we created
+`az spring app deploy -n springapp --artifact-path target/demo-0.0.1-SNAPSHOT.jar -s the-asa-service -g playing1`
+
+, and we want it to use Java 17.
+At the time of writing this workshop, the acceptable runtime versions are Java_8, Java_11, Java_17, and NetCore_3.1 for your
+
+
+
+.
 
 
 1. Login - because we can't open an iframe for the portal
