@@ -61,7 +61,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 == Run  our application "locally"
 
-Now we can see the awesomeness that is our new application. Click on the execution below which which switches back to the terminal and
+Now we can see the awesomeness that is our new application. Click on the execution below which switches back to the terminal and
 runs Maven.
 
 [source, bash, role=execute]

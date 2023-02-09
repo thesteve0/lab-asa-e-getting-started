@@ -1,5 +1,0 @@
-
-
-== aliases: []
-
-Now that you have deployed your application, let's go through the process of making a simple change, since we will be making many in the following chapters to augment our application while demonstrating more of the Azure Spring Apps capabilities
