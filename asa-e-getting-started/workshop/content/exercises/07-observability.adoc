@@ -1,9 +1,0 @@
-
-== aliases: []
-
-What capabilities does Azure provide that can help in observing your application.
-
-* _Azure Monitor_ has:
-* _Monitor logs_. You need to create a workspace so that then you can forward the logs to it and then go there to analyze logs of your app.
-* _Log analytics_. This is where you can get all your logs in an analytical way.
-* _Application insights_. This gives you traceability of how your application is being used. Application Performance Monitoring.
