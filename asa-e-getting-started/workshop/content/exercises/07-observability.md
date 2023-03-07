@@ -1,6 +1,8 @@
 = Logs and Monitoring
 
-Logging and monitoring are some of the key activities you do while developing an app. Each activity provides valuable information as you iterate on your app. 
+Logging and monitoring are key activities you do while developing an app. ASA-E tools provide valuable information as you iterate on your app. In this class we are only going to show the default Azure tools but with Enterprise you can also use [https://docs.vmware.com/en/Application-Live-View-for-VMware-Tanzu/1.1/docs/GUID-index.html](App Live View). All that is required to get more Spring specific metrics is adding [https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html](Spring Actuator) to your project and then turn it on in your application. Demonstrating how to use this tooling is beyond the scope of this class, but we thought it was important for you to know that feature is available to you.   
+
+We used the CLI for most of the sections before this, but logging and monitoring are activities best done using the web interface.  
 
 == Logging
 
@@ -28,8 +30,23 @@ If you want to stop following the logs, just hit CTRL+C to return the shell.
 
 Please note that this command only displays a certain number of lines of pre-connection output and then output moving forward. In our example, we see from the beginning of Spring Boot application being started until the most recent line in the log file. This happens to be all the log output that is available. But, your log had more lines than visible, to see more lines you can add a _-- lines_ flag followed by an integer < 1000. Adding this flag will display the number of lines before the most recent log statement or until the beginning of the file, whichever comes first. 
 
-Next well will cover searching through our logs. 
+Using Azure application logging is more full-featured method to explore your log files. 
 
+If it is not already open, please go ahead and open the Azure Portal(https://portal.amazon.com) in another tab. Since we auth'ed to enable the CLI, the browser should still have your login information cached. 
+
+We need to navigate to our application to explore logging and monitoring. In the middle of the page, there should be a list of all the resources you have in Azure. One line will contain an Azure Spring Apps icon and the name of the ASA-E service instance you created.
+
+![](images/logging-asa-service-list.jpg)
+
+If you don't see your ASA-E service listed there then click on Azure Spring Apps icon along the top with the other services. Once you click this it should bring you to a list which containers your instance of the service.
+
+![](images/logging-asa-service-bar.jpg)
+
+You should now be looking at the overview of your service. We are not going to explore that today and instead just stay focused on monitoring and logging. On the left nav bar you should a category called monitoring. These views will contain the tools we are about to work with. Let's start with logging by clicking on the Logs item in the list.
+
+![](images/logging-left-nav.jpg)
+
+STOPPED HERE. 
 
 == aliases: []
 

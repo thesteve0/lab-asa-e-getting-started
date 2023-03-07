@@ -73,8 +73,15 @@ Now we package it up on our end and deploy it to the app we created:
 az spring app deploy -n simpleapp --artifact-path target/demo-0.0.1-SNAPSHOT.jar -s first-asa-service -g learning
 ```
 
-@TODO put in the BP_BUILD_JVM varieable, and we want it to use Java 17.
-At the time of writing this workshop, the acceptable runtime versions are Java_8, Java_11, Java_17, and NetCore_3.1 for your
+If you wanted to deploy from source rather than from an artifact you could use --source-path instead of --artifact-path
+
+You can set different JVM version for the build by adding a 
+
+```shell
+--build-env=BP_JVM_VERSION=11.*
+```
+
+You can see more build variables in this [how-to guide](https://learn.microsoft.com/en-us/azure/spring-apps/how-to-enterprise-deploy-polyglot-apps#deploy-a-polyglot-application).
 
 You should start to see this output: 
 
