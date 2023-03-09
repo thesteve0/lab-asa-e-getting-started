@@ -32,7 +32,7 @@ Please note that this command only displays a certain number of lines of pre-con
 
 Using Azure application logging is more full-featured method to explore your log files. 
 
-If it is not already open, please go ahead and open the Azure Portal(https://portal.amazon.com) in another tab. Since we auth'ed to enable the CLI, the browser should still have your login information cached. 
+If it is not already open, please go ahead and open the [Azure Portal](https://portal.amazon.com) in another tab. Since we auth'ed to enable the CLI, the browser should still have your login information cached. 
 
 We need to navigate to our application to explore logging and monitoring. In the middle of the page, there should be a list of all the resources you have in Azure. One line will contain an Azure Spring Apps icon and the name of the ASA-E service instance you created.
 
@@ -46,7 +46,15 @@ You should now be looking at the overview of your service. We are not going to e
 
 ![](images/logging-left-nav.jpg)
 
-STOPPED HERE. 
+== Logging on website
+
+When you click the Logs icon you will be greeted by a catalog of pre-written log queries that are useful for different purposes. These are just suggested starting points, you will be able to change this query or write your own. On the left side of the screen you can skip to different section in the list. This logging interface is common to most Azure services and has its [own documentation](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/data-platform-logs). It would be well worth your time to explore the logging service in depth.
+
+For right now we are just going to look 
+
+
+
+
 
 == aliases: []
 
