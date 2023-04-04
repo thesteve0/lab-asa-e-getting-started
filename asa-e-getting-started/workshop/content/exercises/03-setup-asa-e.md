@@ -3,8 +3,6 @@
 
 This lab *requires* that you have an Azure account which has access to Azure Spring Apps Enterprise.
 
-!!!!!!!!!TODO instructions here on how to see if you have access in the web console.
-
 This lab assumes you know Spring, but you are not that familiar with Azure or Azure Spring Apps Enterprise (ASA-E). Most of the important concepts used in this lab were covered in the previous exercise. If you want to go deeper you can do the https://docs.microsoft.com/en-us/training/courses/az-900t00[course AZ-900T00], especially the last 2 modules.
 
 It is also important to understand that, for Azure Spring Apps, the web interface is primarily read-only. You can do some very basic high-level resource creation but the majority of your work has to happen through either the command line or IDE plugin (https://code.visualstudio.com/docs/azure/extensions[VSCode] and https://plugins.jetbrains.com/plugin/8053-azure-toolkit-for-intellij[Intellij]). Due to this architecture, there will not be many web screenshots until we get to features such as monitoring or logging.
@@ -63,22 +61,26 @@ The `+-n+` is the name you want to give to your resource group. Here we chose "l
 
 . With that complete we are ready to make our Spring App Enterprise Service.
 +
-[source,console,role=execute,copy]
-----
-az spring create -n the-asa-service -g learning --sku Enterprise  --enable-gateway --enable-api-portal
-----
+```copy
+az spring create -n the-asa-service -g learning --sku Enterprise
+```
 
 This command will take a while to complete as Azure is spinning up a cluster for your applications.
 
-When this is finished provision you now have your Azure Spring App Enterprise service up and running. We have also enabled the Spring Gateway and Spring API Portal features.
+When this is finished provision you now have your Azure Spring App Enterprise service up and running. We could have also
+enabled the Spring Gateway and Spring API Portal features by adding the following flags to the command above
+
+```
+--enable-gateway --enable-api-portal
+```
+
 You are all set to deploy your Spring (or various https://learn.microsoft.com/en-us/azure/spring-apps/overview#deploy-and-manage-spring-and-polyglot-applications[other languages]). We are ready to create an application and deploy some code on our new shiny service:
 
-This is kinda cool to set the defaults so you don't have to keep entereing it.
+This is nice feature to set some of the defaults for the CLI so you don't have to keep re-entering it.
 
-[source,console]
-----
+```
 az configure --defaults \
     group=${RESOURCE_GROUP} \
     location=${REGION} \
     spring=${SPRING_APPS_SERVICE}
-----
+```

@@ -6,6 +6,8 @@ preliminaries complete we can demonstrate the benefits of moving your applicatio
 
 ## Logging in and creating our Resource Group
 
+You can skip these steps if you followed along in section 3 when we set everything up. 
+
 If you forgot the check if you were https://learn.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest#az-login[logged in] or not in an earlier step doing the rest of the workshop requires an authenticaded CLI. Remember we are using "--use-device-code" because, following good security practices, we can not wrap the login page in the Iframe we have here.
 
 ```execute
@@ -45,7 +47,7 @@ With that out of the way we can now create our Azure Spring Apps Enterprise serv
 
 
 ```copy
-az spring create -n first-asa-service -g learning --sku Enterprise
+az spring create -n the-asa-service -g learning --sku Enterprise
 ```
 
 Our ASA-E service will be named 'first-asa-service', we want to create in the resource group we just made, and we want to enable the enterprise tier.
@@ -59,8 +61,8 @@ Now that we have our own ASA-E service spun up we can move our simple app into t
 
 1. First we create the application inside the service. An app is its own resource and can have 1 or more deployments.
 +
-``` execute
-az spring app create -n simpleapp -s first-asa-service -g learning  --assign-endpoint true
+```copy
+az spring app create -n simpleapp -s the-asa-service -g learning  --assign-endpoint true
 ```
 +
 This command creates an app named "simpleapp", in our service, in the learning resource group, and we want the system to give us a public endpoint
@@ -70,7 +72,7 @@ This command creates an app named "simpleapp", in our service, in the learning r
 Now we package it up on our end and deploy it to the app we created:
 
 ```execute
-az spring app deploy -n simpleapp --artifact-path target/demo-0.0.1-SNAPSHOT.jar -s first-asa-service -g learning
+az spring app deploy -n simpleapp --artifact-path target/demo-0.0.1-SNAPSHOT.jar -s the-asa-service -g learning
 ```
 
 If you wanted to deploy from source rather than from an artifact you could use --source-path instead of --artifact-path
@@ -104,7 +106,7 @@ There are two different ways to get the URL for our application.
 2. Or you can use the CLI with the following command:
 
 ```shell execute
-az spring app show -n simpleapp -s first-asa-service -g learning -o table
+az spring app show -n simpleapp -s the-asa-service -g learning -o table
 ```
 
 Instead of creating an application, we are querying for the information on the application. If you leave off the _-o table_ there will be a quite a large JSON object returned which may make it difficult to find the URL.
