@@ -8,22 +8,23 @@ preliminaries complete we can demonstrate the benefits of moving your applicatio
 
 You can skip these steps if you followed along in section 3 when we set everything up. 
 
-If you forgot the check if you were https://learn.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest#az-login[logged in] or not in an earlier step doing the rest of the workshop requires an authenticaded CLI. Remember we are using "--use-device-code" because, following good security practices, we can not wrap the login page in the Iframe we have here.
+If you forgot the check if you were [logged in](https://learn.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest#az-login) or not in an earlier step doing the rest of the workshop requires an authenticaded CLI. Remember we are using _"--use-device-code"_ because, following good security practices, we can not wrap the login page in the Iframe we have here.
 
 ```execute
  az login --use-device-code
 ```
 
-After executing this command, you should receive a prompt to go to a Microsoft website and enter a code. Clicking the link will open a new browser tab for the URL. You can also just copy the URL and open it in a completely different browser. Once you loging to Azure and enter the code your CLI will be authenticated for the rest of this class. When you finish with this workshop we destroy the machine hosting your workshop and delete any session information. Your password is never shared with us.
+After executing this command, you should receive a prompt to go to a Microsoft website and enter a code. Clicking the link will open a new browser tab for the URL. You can also just copy the URL and open it in a completely different browser. 
 
-Now that you are logged in, the next step is to create a resource group to hold all the work we create today. Remember, resource group is similar to a namespace within your account. Having this created will make it exteremely easy for you to clean up all the Azure resources when we finish. Delete the resource group and everything inside it is deleted. No hunting around for random service or virtual IP floating around still costing you money.
+Once you login to Azure and enter the code your CLI will be authenticated for the rest of this class. When you finish with this workshop we destroy this virtual machine hosting your workshop and delete any session information. Your password is never shared with us.
 
-This command will require you to pick a region where your services will be created. We suggest you pick one that is physically closest to you.  The https://stackoverflow.com/questions/44143981/is-there-an-api-to-list-all-azure-regions[following command] lists all the current availability zones:
+Now that you are logged in, the next step is to create a resource group to hold all the work we create today. Remember, resource group is similar to a namespace within your account. Creating this will make it extremely easy for you to clean up all the Azure resources when we finish. 
+
+Creating a resource group will require you to pick a region where your services will be created. We suggest you pick one that is physically closest to you.  The https://stackoverflow.com/questions/44143981/is-there-an-api-to-list-all-azure-regions[following command] lists all the current availability zones:
 
 ```execute
 az account list-locations -o table
 ```
-
 
 The second column, Name, is the code you want to use in the create region command. Since the author is in California, the example will show West US 2.
 
@@ -31,7 +32,15 @@ The second column, Name, is the code you want to use in the create region comman
 az group create -l westus2 -n learning
 ```
 
-This creates a Resource Group in westus2 with a name of playing1. You can use whatever name would you like for your resource group, just make sure to alter the rest of the commands to match your name.
+This creates a Resource Group in westus2 with a name of learning. You can use whatever name would you like for your resource group, just make sure to alter the rest of the following commands to match your name.
+
+**REMEMBER** when we are DONE with the workshop you should delete the resource group which delete everyting inside it.
+
+```
+az group delete --name learning -l westus2
+```
+
+No hunting around for random service or virtual IP floating around still costing you money.
 
 
 ## Creating our ASA-E Service
@@ -59,12 +68,12 @@ NOTE: It can take 15 to 30 minutes to create this service. This command triggers
 ### Creating the application
 Now that we have our own ASA-E service spun up we can move our simple app into the service. There are two stages to getting an app into the service
 
-1. First we create the application inside the service. An app is its own resource and can have 1 or more deployments.
-+
+First we create the application inside the service. An app is its own resource and can have 1 or more deployments.
+
 ```copy
 az spring app create -n simpleapp -s the-asa-service -g learning  --assign-endpoint true
 ```
-+
+
 This command creates an app named "simpleapp", in our service, in the learning resource group, and we want the system to give us a public endpoint
 
 ### Deploying the application
@@ -115,7 +124,7 @@ Either shift+click or copy and paste the URL to see your application.
 
 Congratulations, you have deployed your first application to Azure Spring Apps Enterprise.
 
-As you can see we needed to make 0 modifications to our code to get it running in ASA-E. This is one of the advavtages of ASA-E, run your same Spring Applications but let Azure handle the infrastructure and scaling issues. 
+As you can see we needed to make 0 modifications to our code to get it running in ASA-E. This is one of the advantages of ASA-E, run your same Spring Applications but let Azure handle the infrastructure and scaling issues. 
 
 Let's go ahead and see how to make code changes to our application.
 

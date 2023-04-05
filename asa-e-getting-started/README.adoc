@@ -84,3 +84,6 @@ https://docs.educates.dev/custom-resources/workshop-definition.html#defining-add
 https://docs.educates.dev/workshop-content/workshop-instructions.html#passing-of-environment-variables
 
 https://docs.educates.dev/workshop-content/workshop-instructions.html#clickable-actions-for-the-dashboard
+
+@TODO
+Then we need to consolidate and split the current 3 and 5

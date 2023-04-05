@@ -4,10 +4,10 @@ modules:
     exit_sign: On to Concepts
   exercises/01-asa-e-concepts:
     name: Azure Concepts
+  exercises/02-create-a-local-springapp:
+    name: Making a Local Spring Application
   exercises/03-setup-asa-e:
     name: Setting up the ASA Environment
-  exercises/04-create-a-local-springapp:
-    name: Making a Local Spring Application
   exercises/05-create-and-deploy-an-app:
     name: Putting the App in Azure
   exercises/06-changes-in-code:

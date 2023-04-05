@@ -1,33 +1,30 @@
-= Creating a local Spring Application
+# Creating a local Spring Application
 
 While usually you might go to https://start.spring.io to create new application, we have already added the application code to this coding environment. The application is only using Spring Boot and Spring Web functionality.
 
-== Editing the code
+## Editing the code
 
-WARNING: This code is only for ease of teaching and NOT a pattern you should use in real life.
+**WARNING**: This code is only for ease of teaching and NOT a pattern you should use in real life.
 
-The top directory of the code is demo
+The top directory for the code is _./demo_
 
-[source, bash, role=execute]
-----
+```execute]
 cd demo
-----
+```
 
 and it has a typical Maven file layout.
 
-For the code it will be ugly but also simple so we can focus on ASA-E rather than the code.
+For the code it will be ugly, but also simple, allowing us to focus on ASA-E rather than the code.
 
-We need to to edit the file demo/src/main/java/com/example/demo/DemoApplication.java
+We need to to edit the file _demo/src/main/java/com/example/demo/DemoApplication.java_
 
-[source,bash,role=editor:open-file]
-----
+```editor:open-file
 file: ~/exercises/demo/src/main/java/com/example/demo/DemoApplication.java
-----
+```
 
 Make the file look like this and save your changes.
 
-[source, java]
-----
+```java,copy
 package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
@@ -56,20 +53,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
      return "hello spring";
   }
  }
-----
+```
 
+## Run  our application "locally"
 
-== Run  our application "locally"
+Now we can see the awesomeness that is our new application. Click on the execution below which switches back to the terminal and runs Maven.
 
-Now we can see the awesomeness that is our new application. Click on the execution below which switches back to the terminal and
-runs Maven.
-
-[source, bash, role=execute]
-----
+```execute
 mvn spring-boot:run
-----
+```
 
 See it here:
+
 http://application-{{ session_namespace }}.{{ ingress_domain }}:{{ ingress_port }}
 
-With that completed we have built our money making application that we need to move Azure Spring Apps Enterprise. Let's go ahead and send it over...
+With that completed we have built our money making application (not really) that we need to move Azure Spring Apps Enterprise. Let's go ahead and send it over...

@@ -1,8 +1,8 @@
 # Logs and Monitoring
 
-Logging and monitoring are key activities you do while developing an app. ASA-E tools provide valuable information as you iterate on your app. In this class we are only going to show the default Azure tools but with Enterprise you can also use [https://docs.vmware.com/en/Application-Live-View-for-VMware-Tanzu/1.1/docs/GUID-index.html](App Live View). All that is required to get more Spring specific metrics is adding [https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html](Spring Actuator) to your project and then turn it on in your application. Demonstrating how to use this tooling is beyond the scope of this class, but we thought it was important for you to know that feature is available to you.   
+Logging and monitoring are key activities you do while developing an app. ASA-E tools provide valuable information as you iterate on your app. In this class we are only going to show the default Azure tools but with Enterprise you can also use [App Live View](https://docs.vmware.com/en/Application-Live-View-for-VMware-Tanzu/1.1/docs/GUID-index.html). All that is required to get more Spring specific metrics is adding [Spring Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html) to your project and then turn it on in your application. Demonstrating how to use this tooling is beyond the scope of this class, but we thought it was important for you to know that feature is available to you.   
 
-We used the CLI for most of the sections before this, but logging and monitoring are activities best done using the web interface.  
+We used the CLI for most of the sections before this, but logging and monitoring are activities best done using the web interface.  We'll show one of the useful CLI commands and then move to the web. 
 
 ## Logging
 
@@ -104,13 +104,10 @@ Go ahead and play around with the time frame and the items on the left side unde
 
 And with that we are having gone through the main ideas for logging and monitoring. As mentioned above, Azure offers a broad and powerful set of tools to help you with monitoring and logging. I highly encourage you to explore this suite of "instant" power you just got!
 
-Let's go ahead and wrap up.
+## **IMPORTANT** 
+Before we wrap up, to avoid accumulating charges in Azure, we are going to delete our resource group.
+It is one simple, but important, command - nobody likes surprise cloud hosting bills.
 
-== aliases: []
-
-What capabilities does Azure provide that can help in observing your application.
-
-* _Azure Monitor_ has:
-* _Monitor logs_. You need to create a workspace so that then you can forward the logs to it and then go there to analyze logs of your app.
-* _Log analytics_. This is where you can get all your logs in an analytical way.
-* _Application insights_. This gives you traceability of how your application is being used. Application Performance Monitoring.
+```execute
+az group delete --name learning -l westus2
+```

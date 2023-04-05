@@ -1,11 +1,12 @@
-name: Starter Workshop
+name: ASA-E Workshop
 modules:
   activate:
   - workshop-overview
   - exercises/01-asa-e-concepts
+  - exercises/02-create-a-local-springapp
   - exercises/03-setup-asa-e
-  - exercises/04-create-a-local-springapp
-  - exercises/06-create-and-deploy-an-app
+  - exercises/05-create-and-deploy-an-app
+  - exercises/06-changes-in-code
   - exercises/07-observability
   - workshop-summary
 
