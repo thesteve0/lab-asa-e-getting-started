@@ -1,67 +1,7 @@
+# Creating an App and Deploying to Azure Spring Apps Enterprise (ASA-E)
 
-# Deploying to Azure Spring Apps Enterprise (ASA-E)
+Let's jump right in with the CLI.
 
-Up until this point in the tutorial we haven't done anything really worth mentioning (unless you never ran a Spring Boot app before). But with all those
-preliminaries complete we can demonstrate the benefits of moving your applications to ASA-E. Let's jump right in with the CLI.
-
-## Logging in and creating our Resource Group
-
-You can skip these steps if you followed along in section 3 when we set everything up. 
-
-If you forgot the check if you were [logged in](https://learn.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest#az-login) or not in an earlier step doing the rest of the workshop requires an authenticaded CLI. Remember we are using _"--use-device-code"_ because, following good security practices, we can not wrap the login page in the Iframe we have here.
-
-```execute
- az login --use-device-code
-```
-
-After executing this command, you should receive a prompt to go to a Microsoft website and enter a code. Clicking the link will open a new browser tab for the URL. You can also just copy the URL and open it in a completely different browser. 
-
-Once you login to Azure and enter the code your CLI will be authenticated for the rest of this class. When you finish with this workshop we destroy this virtual machine hosting your workshop and delete any session information. Your password is never shared with us.
-
-Now that you are logged in, the next step is to create a resource group to hold all the work we create today. Remember, resource group is similar to a namespace within your account. Creating this will make it extremely easy for you to clean up all the Azure resources when we finish. 
-
-Creating a resource group will require you to pick a region where your services will be created. We suggest you pick one that is physically closest to you.  The https://stackoverflow.com/questions/44143981/is-there-an-api-to-list-all-azure-regions[following command] lists all the current availability zones:
-
-```execute
-az account list-locations -o table
-```
-
-The second column, Name, is the code you want to use in the create region command. Since the author is in California, the example will show West US 2.
-
-```copy
-az group create -l westus2 -n learning
-```
-
-This creates a Resource Group in westus2 with a name of learning. You can use whatever name would you like for your resource group, just make sure to alter the rest of the following commands to match your name.
-
-**REMEMBER** when we are DONE with the workshop you should delete the resource group which delete everyting inside it.
-
-```
-az group delete --name learning -l westus2
-```
-
-No hunting around for random service or virtual IP floating around still costing you money.
-
-
-## Creating our ASA-E Service
-
-If you have never created an ASA-E service before, you need to accept the terms of service before continuing:
-
-```execute
-az provider register --namespace Microsoft.SaaS
-az term accept --publisher vmware-inc --product azure-spring-cloud-vmware-tanzu-2 --plan asa-ent-hr-mtr
-```
-
-With that out of the way we can now create our Azure Spring Apps Enterprise service.
-
-
-```copy
-az spring create -n the-asa-service -g learning --sku Enterprise
-```
-
-Our ASA-E service will be named 'first-asa-service', we want to create in the resource group we just made, and we want to enable the enterprise tier.
-
-NOTE: It can take 15 to 30 minutes to create this service. This command triggers the creation of a cluster of machines. Even if the animated icon stops spinning it is still working on creating the service. You will only need to run this command once and then you can add as many applications as you want to this service (within resource limits)
 
 ## Creating and deploying our simple app
 
@@ -74,11 +14,11 @@ First we create the application inside the service. An app is its own resource a
 az spring app create -n simpleapp -s the-asa-service -g learning  --assign-endpoint true
 ```
 
-This command creates an app named "simpleapp", in our service, in the learning resource group, and we want the system to give us a public endpoint
+This command creates an app named "simpleapp", in our service, in the learning resource group, and we want the system to give us a public endpoint. The public endpoint will be an URL pointing to our application accessible outside Azure.
 
 ### Deploying the application
 
-Now we package it up on our end and deploy it to the app we created:
+Now we package our simple app and and deploy it to the app we just created:
 
 ```execute
 az spring app deploy -n simpleapp --artifact-path target/demo-0.0.1-SNAPSHOT.jar -s the-asa-service -g learning
@@ -103,28 +43,27 @@ This command usually takes minutes to run. Add '--verbose' parameter if needed.
 ...
 ```
 
-You will start to see the system use [Paketo Buildpack](https://paketo.io/) to create the container image to deploy to the application service.  This process may take 2-5 minutes. In later examples we will show some hints to speed up the build process.
+You will start to see the system use [Paketo Buildpack](https://paketo.io/) to create the container image to deploy to the application service.  This process may take 2-5 minutes. 
 
-When the process is finished the CLI will give you some information about the deploy and the app should be ready to go. 
+When the process is finished the CLI will give you some information about the deploy. At this point the application should be ready to receive requests. 
 
 ## Viewing our application
 
 There are two different ways to get the URL for our application.
 
-1. You can log in to the [Azure Portal](https://portal.azure.com/) and then navigate to the ASA-E service. So click on the _learning_ resource group, then click on _first-asa-service_, then, on the left navigation click on Apps, then click on _simpleapp_, and finally, on the top of the page will be the URL to click to see your application in action.
+1. You can log in to the [Azure Portal](https://portal.azure.com/) and then navigate to the ASA-E service. To do this, click on the _learning_ resource group, then click on _first-asa-service_, then, on the left navigation click on Apps, then click on _simpleapp_, and finally, on the top of the page will be the URL to click to see your application in action.
 2. Or you can use the CLI with the following command:
 
 ```shell execute
 az spring app show -n simpleapp -s the-asa-service -g learning -o table
 ```
 
-Instead of creating an application, we are querying for the information on the application. If you leave off the _-o table_ there will be a quite a large JSON object returned which may make it difficult to find the URL.
+Instead of creating an application with this command, we are querying for the information on the application. If you leave off the _-o table_ there will be a quite a large JSON object returned which may make it difficult to find the URL.
 
-Either shift+click or copy and paste the URL to see your application. 
+Either _shift+click_ or copy and paste the URL to see your application. 
 
 Congratulations, you have deployed your first application to Azure Spring Apps Enterprise.
 
-As you can see we needed to make 0 modifications to our code to get it running in ASA-E. This is one of the advantages of ASA-E, run your same Spring Applications but let Azure handle the infrastructure and scaling issues. 
+As you can see we needed to make 0 modifications to our code to get it running in ASA-E. This is one of the advantages of ASA-E: run your same Spring Applications but let Azure handle the infrastructure and scaling issues. 
 
 Let's go ahead and see how to make code changes to our application.
-

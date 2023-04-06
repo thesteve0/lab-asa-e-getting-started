@@ -85,5 +85,31 @@ https://docs.educates.dev/workshop-content/workshop-instructions.html#passing-of
 
 https://docs.educates.dev/workshop-content/workshop-instructions.html#clickable-actions-for-the-dashboard
 
-@TODO
-Then we need to consolidate and split the current 3 and 5
+## To run this locally
+1. Make sure you get the latest educates cli from Github
+2. Change to the top directory of the repo
+
+```shell
+cd /home/spousty/git/lab-asa-e-getting-started
+```
+
+3. Make sure there are no old workshops hanging around
+
+```shell
+educates list-workshops
+educates docker workshop delete -f asa-e-getting-started
+```
+   
+5. Publish the workshop content
+
+```shell
+educates publish-workshop asa-e-getting-started
+
+```
+
+6. Deploy the workshop to educates
+
+```shell
+educates docker workshop deploy -f asa-e-getting-started
+```
+

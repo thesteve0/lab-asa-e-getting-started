@@ -4,7 +4,8 @@ metadata:
   name: asa-e-getting-started
 spec:
   title: Getting Started With Azure Spring Apps Enterprise (ASA-E)
-  description: Introduction and getting started with ASA-E, an Azure application platform that integrates projects from the Spring ecosystem. Almost seamlessly, move your apps from your laptop to Azure while keeping all the Spring pieces you have integrated into your application. It is a polyglot service that which allows you to focus on the code, and the containerization and deployment are hendled by ASA-E.
+  description: Introduction and getting started with ASA-E, an Azure application platform that integrates projects from the Spring ecosystem. Almost seamlessly, move your apps from your laptop to Azure while keeping all the Spring pieces you have integrated into your application. It is a polyglot service that which allows you to focus on the code, and the containerization and deployment are handled by ASA-E. Please note, spinning up the services can take a while, so there will be chunks of time where you will be waiting for a service to spin up.
+  duration: 60m
   workshop:
     image: ghcr.io/thesteve0/educates-asa-e-image:latest
     files:
@@ -23,7 +24,6 @@ spec:
     applications:
       terminal:
         enabled: true
-        layout: split
       console:
         enabled: true
       editor:
